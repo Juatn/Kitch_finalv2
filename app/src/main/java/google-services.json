@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "565704595161",
+    "firebase_url": "https://kitch-f08b6.firebaseio.com",
+    "project_id": "kitch-f08b6",
+    "storage_bucket": "kitch-f08b6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:565704595161:android:9da5456135f2aac0",
+        "android_client_info": {
+          "package_name": "moreno.juan.kitch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "565704595161-sn7ha4td69vdtafcrm2hlrlgtvafdemp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "moreno.juan.kitch",
+            "certificate_hash": "888d81807614156b7287d701501aba3017cb5601"
+          }
+        },
+        {
+          "client_id": "565704595161-mfbscqv5bsqndiugc506gvqu5ptc1bgn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_ZGtJzgAoNbiqXQLZRlIHxnJb6LSpV8s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "565704595161-mfbscqv5bsqndiugc506gvqu5ptc1bgn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
