@@ -142,9 +142,7 @@ public class Drawler extends AppCompatActivity
             case R.id.nav_manage:
                 fragmentManager.beginTransaction().replace(R.id.contenedor, new MiPerfilFragment()).commit();
                 break;
-            case R.id.nav_share:
 
-                break;
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

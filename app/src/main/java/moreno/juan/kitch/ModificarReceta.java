@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,6 +41,9 @@ public class ModificarReceta extends AppCompatActivity implements View.OnClickLi
     private FirebaseAuth auth;
     FirebaseFirestore db;
     DocumentReference recetasRef;
+    private ScrollView scroll_principal;
+    private ScrollView scroll_ingredientes;
+    private ScrollView scroll_elaboracion;
     public static Receta receta;
     private Uri imgURI;
 
@@ -59,8 +64,12 @@ public class ModificarReceta extends AppCompatActivity implements View.OnClickLi
         recetasRef= db.collection(Utils.FIREBASE_BDD_RECETAS).document(receta.getId());
         auth = FirebaseAuth.getInstance();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, Utils.categorias);
+        scroll_principal=findViewById(R.id.scroll_modificar_receta);
+        scroll_ingredientes=findViewById(R.id.scroll_modificar_ingredientes);
+        scroll_elaboracion=findViewById(R.id.scroll_modificar_elaboracion);
         //set the spinners adapter to the previously created one.
         spinner_categorias.setAdapter(adapter);
+
 
 
 
@@ -68,6 +77,42 @@ public class ModificarReceta extends AppCompatActivity implements View.OnClickLi
         btn_new_receta.setOnClickListener(this);
         btn_eliminar.setOnClickListener(this);
         cargarReceta();
+        scroll_principal.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+
+                findViewById(R.id.scroll_modificar_elaboracion).getParent()
+                        .requestDisallowInterceptTouchEvent(false);
+                findViewById(R.id.scroll_modificar_ingredientes).getParent()
+                        .requestDisallowInterceptTouchEvent(false);
+                return false;
+            }
+        });
+
+        scroll_elaboracion.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+
+                // Disallow the touch request for parent scroll on touch of  child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+        scroll_ingredientes.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+
+                // Disallow the touch request for parent scroll on touch of  child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
 
     }
 

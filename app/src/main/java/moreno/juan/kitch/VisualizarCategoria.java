@@ -84,6 +84,16 @@ public class VisualizarCategoria extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        try {
+            this.finalize();
+            startActivity(new Intent(getApplicationContext(),Drawler.class));
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+
+    }
 
     public SweetAlertDialog warningMensaje(String titulo, String contexto, String texto_confirmacion) {
 

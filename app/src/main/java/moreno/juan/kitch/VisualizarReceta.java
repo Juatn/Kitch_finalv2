@@ -204,7 +204,7 @@ public class VisualizarReceta extends AppCompatActivity implements View.OnClickL
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                warningMensaje("Opss...", "Algo salio mal", "vale");
+                warningMensaje("Opss...", "Algo salio mal", "vale").show();
             }
         });
 
@@ -225,10 +225,7 @@ public class VisualizarReceta extends AppCompatActivity implements View.OnClickL
             mensaje.setF_nota_receta(puntuacion_receta_comentario.getRating());
             mensaje.setS_mensaje(escribir_nuevo_comentario.getText().toString());
             mensaje.setImagen_usuario(Objects.requireNonNull(Objects.requireNonNull(mAuth.getCurrentUser()).getPhotoUrl()).toString());
-            if (!Objects.requireNonNull(mAuth.getCurrentUser().getEmail()).equals(receta_visualizada.getEmail_usuario())){
-                //si el creador de la receta comenta, no podra ponerse nota.
-                mensaje.setF_nota_receta(-1f);
-            }
+
             // Get a new write batch
              {
                 FirebaseFirestore.getInstance().collection(Utils.FIREBASE_BDD_RECETAS)

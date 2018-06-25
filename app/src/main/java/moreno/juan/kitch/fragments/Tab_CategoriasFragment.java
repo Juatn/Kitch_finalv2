@@ -86,7 +86,7 @@ public class Tab_CategoriasFragment extends Fragment {
                     if (child != null && mGestureDetector.onTouchEvent(motionEvent)) {
 
                         int position = recyclerView.getChildAdapterPosition(child);
-                        // puede petar try catch
+
                         VisualizarCategoria.categoria_seleccionada = categorias.get(position);
 
                         startActivity(new Intent(rootView.getContext().getApplicationContext(), VisualizarCategoria.class));

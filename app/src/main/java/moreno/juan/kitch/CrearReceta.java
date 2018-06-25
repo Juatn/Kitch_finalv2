@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -54,6 +56,9 @@ public class CrearReceta extends AppCompatActivity implements View.OnClickListen
     private FirebaseAuth auth;
     private Uri imgURI;
     private StorageTask mUploadTask;
+    private ScrollView scroll_principal;
+    private ScrollView scroll_ingredientes;
+    private ScrollView scroll_elaboracion;
 
     private DatabaseReference mDatabaseRef;
 
@@ -68,6 +73,10 @@ public class CrearReceta extends AppCompatActivity implements View.OnClickListen
         txt_ingredientes = findViewById(R.id.txtingredientes);
         txt_nombre_receta = findViewById(R.id.txtnombre_receta);
         txt_elaboracion = findViewById(R.id.txtelaboracion);
+        scroll_principal=findViewById(R.id.scroll_crear_receta);
+        scroll_ingredientes=findViewById(R.id.scroll_crear_ingredientes);
+        scroll_elaboracion=findViewById(R.id.scroll_crear_elaboracion);
+
         progressbar_receta = findViewById(R.id.progressbar_crear_receta);
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("recetas");
         storageReference = FirebaseStorage.getInstance().getReference("recetas");
@@ -81,6 +90,42 @@ public class CrearReceta extends AppCompatActivity implements View.OnClickListen
 
         image_receta.setOnClickListener(this);
         btn_new_receta.setOnClickListener(this);
+        scroll_principal.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+
+                findViewById(R.id.scroll_crear_elaboracion).getParent()
+                        .requestDisallowInterceptTouchEvent(false);
+                findViewById(R.id.scroll_crear_ingredientes).getParent()
+                        .requestDisallowInterceptTouchEvent(false);
+                return false;
+            }
+        });
+
+        scroll_elaboracion.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+
+                // Disallow the touch request for parent scroll on touch of  child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+        scroll_ingredientes.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+
+                // Disallow the touch request for parent scroll on touch of  child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
 
 
     }
@@ -179,19 +224,26 @@ public class CrearReceta extends AppCompatActivity implements View.OnClickListen
 
                             // se añade a firebase
                             db.collection(Utils.FIREBASE_BDD_RECETAS)
-                                    .add(upload).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentReference> task) {
-                                    Utils.mensajeBasico(getApplicationContext(),"Receta creada",SweetAlertDialog.NORMAL_TYPE).show();
-                                }
-                            })
+                                    .add(upload)
                                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
                                             // Actualizamos el id de la clase receta con el del documento generado
-                                            documentReference.update("id", documentReference.getId());
+                                            documentReference.update("id", documentReference.getId()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Utils.mensajeBasico(getApplicationContext(),"Receta creada",SweetAlertDialog.SUCCESS_TYPE);
+                                                    try {
+                                                        this.finalize();
+                                                    } catch (Throwable throwable) {
+                                                        throwable.printStackTrace();
+                                                    }
+                                                    ;
+                                                    startActivity(new Intent(getApplicationContext(), Drawler.class));
 
-                                            startActivity(new Intent(getApplicationContext(), Drawler.class));
+                                                }
+                                            });
+
 
                                         }
                                     })

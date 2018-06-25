@@ -1,5 +1,6 @@
 package moreno.juan.kitch.fragments;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -314,6 +316,7 @@ public class MiPerfilFragment extends Fragment implements View.OnClickListener {
             text_nombre_usuario.requestFocus();
             return;
         }
+
 
         if (user != null) {
             UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll_crear_receta"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFBC5"
+    android:background="@color/sweet_dialog_bg_color"
     android:paddingLeft="10dp"
     android:paddingRight="10dp">
 
@@ -73,21 +74,33 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Introduce Ingredientes, separados por comas"
+            android:text="Ingredientes"
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:textSize="18sp" />
 
-        <EditText
-            android:id="@+id/txtingredientes"
+        <ScrollView
+            android:id="@+id/scroll_crear_ingredientes"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/red_press"
-            android:ems="10"
-            android:gravity="left|top"
-            android:inputType="textMultiLine" />
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/txtingredientes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/red_press"
+                    android:ems="10"
+                    android:gravity="left|top"
+                    android:inputType="textMultiLine" />
+            </LinearLayout>
+        </ScrollView>
 
         <TextView
             android:layout_width="match_parent"
@@ -97,16 +110,28 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:textSize="18sp" />
 
-        <EditText
-            android:id="@+id/txtelaboracion"
+        <ScrollView
+            android:id="@+id/scroll_crear_elaboracion"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/red_press"
-            android:ems="10"
-            android:gravity="left|top"
-            android:inputType="textMultiLine" />
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/txtelaboracion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/red_press"
+                    android:ems="10"
+                    android:gravity="left|top"
+                    android:inputType="textMultiLine" />
+            </LinearLayout>
+        </ScrollView>
 
         <TextView
             android:layout_width="match_parent"
@@ -124,7 +149,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:background="@color/red_btn_bg_pressed_color"
+            android:background="@color/colorPrimaryDark"
             android:spinnerMode="dropdown" />
 
 

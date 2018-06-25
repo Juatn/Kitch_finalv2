@@ -46,8 +46,6 @@ public class MisRecetasFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         toolbar=rootView.findViewById(R.id.toolbar3);
 
-
-
         toolbar.setTitle("Mis recetas");
         toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
@@ -69,11 +67,12 @@ public class MisRecetasFragment extends Fragment {
 
 
         recyclerViewRecetas = view.findViewById(R.id.recicler_mis_recetas);
-
         recyclerViewRecetas.setLayoutManager(mLayoutManager);
         recyclerViewRecetas.setItemAnimator(new DefaultItemAnimator());
         adaptador_recetas = new RecyclerViewAdaptor(misRecetas);
         recyclerViewRecetas.setAdapter(adaptador_recetas);
+
+        //Detector para ver donde pulsamos
 
         final GestureDetector mGestureDetector = new GestureDetector(rootView.getContext().getApplicationContext(), new GestureDetector.SimpleOnGestureListener() {
             @Override
@@ -87,7 +86,7 @@ public class MisRecetasFragment extends Fragment {
             public void onRequestDisallowInterceptTouchEvent(boolean b) {
 
             }
-
+                //onClick del recycleview
             @Override
             public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
                 try {
@@ -116,7 +115,7 @@ public class MisRecetasFragment extends Fragment {
 
         });
     }
-
+    // Carga cada receta en su lista de categoria correspondiente
     public void rellenarMisRecetas() {
 
         if (mAuth.getCurrentUser() != null) {
